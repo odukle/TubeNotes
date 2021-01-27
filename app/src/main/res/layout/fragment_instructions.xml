@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instructions_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="114dp"
+                android:src="@drawable/instructions1"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_note_instructions1"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_margin="20dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:src="@drawable/instructions2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_note_instructions"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_margin="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</FrameLayout>
