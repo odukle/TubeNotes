@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -13,12 +14,18 @@ import kotlinx.android.synthetic.main.activity_about_app.*
 
 
 class AboutApp : AppCompatActivity() {
+
+    private lateinit var adRequest: AdRequest
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_app)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.home_as_up)
         supportActionBar?.title = "About this app"
+
+        adRequest = AdRequest.Builder().build()
+        adView_aa.loadAd(adRequest)
 
         privacy_policy.setOnClickListener {
             startActivity(Intent(this, PrivacyPolicy::class.java))
@@ -56,6 +63,7 @@ class AboutApp : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
         }
         return true
     }

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -16,12 +17,18 @@ import kotlinx.android.synthetic.main.activity_user_info.*
 
 private const val TAG = "UserInfo"
 class UserInfo : AppCompatActivity() {
+
+    private lateinit var adRequest: AdRequest
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.home_as_up)
         supportActionBar?.title = "User info"
+
+        adRequest = AdRequest.Builder().build()
+        adView_user.loadAd(adRequest)
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         Picasso.get().load(currentUser?.photoUrl)
@@ -57,5 +64,10 @@ class UserInfo : AppCompatActivity() {
             onBackPressed()
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
 }

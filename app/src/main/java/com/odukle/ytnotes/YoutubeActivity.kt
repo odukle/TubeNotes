@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -26,12 +27,16 @@ var ya: YoutubeActivity? = null
 
 class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
 
+    private lateinit var adRequest : AdRequest
+
     private var player: YouTubePlayer? = null
     private var adapter: NoteListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.player_view)
 
+        adRequest = AdRequest.Builder().build()
+        adView_pv.loadAd(adRequest)
         ya = this
         val note = intent.getParcelableExtra<Note>(NOTE_OBJECT_KEY)
 
@@ -159,4 +164,9 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+
+    }
 }

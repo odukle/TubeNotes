@@ -5,31 +5,34 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="10"
+    android:gravity="center_vertical"
     android:showDividers="end"
     android:divider="@android:color/darker_gray">
 
     <TextView
         android:id="@+id/nlv_note"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sample text"
+        android:layout_margin="5dp"
         android:foreground="?attr/selectableItemBackground"
         android:textSize="18sp"
         android:maxLines="2"
-        android:layout_weight="8"/>
+        android:layout_weight="7"/>
 
     <ImageButton
         android:id="@+id/nlv_playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:src="@drawable/ic_baseline_play_arrow_24"
-        android:layout_weight="1"/>
+        android:adjustViewBounds="true"
+        android:layout_weight="1.5"/>
 
     <ImageButton
         android:id="@+id/nlv_deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:src="@drawable/ic_baseline_delete_24"
-        android:layout_weight="1"/>
+        android:layout_weight="1.5"/>
 
 </LinearLayout>

@@ -26,6 +26,7 @@ class SplashActivity : AppCompatActivity() {
         Looper.myLooper()?.let {
             Handler(it).postDelayed({
                 startActivity(Intent(this, SignInActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
                 finish()
             }, 800)
         }

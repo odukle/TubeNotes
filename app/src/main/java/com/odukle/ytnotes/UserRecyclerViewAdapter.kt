@@ -115,45 +115,6 @@ open class UserRecyclerViewAdapter(
                 }
             }
 
-            videoNote.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-
-                    adCount++
-                    context.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                        .edit().putInt(I_AD_COUNT, adCount).apply()
-                    if (adCount > 3) {
-                        if (mInterstitialAd.isLoaded) {
-                            mInterstitialAd.show()
-                            adCount = 0
-                            context.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                                .edit().putInt(I_AD_COUNT, adCount).apply()
-                        }
-                    }
-
-                    listener.onItemClick(note, position)
-                }
-            }
-
-            videoTitle.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-
-                    adCount++
-                    context.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                        .edit().putInt(I_AD_COUNT, adCount).apply()
-                    if (adCount > 3) {
-                        if (mInterstitialAd.isLoaded) {
-                            mInterstitialAd.show()
-                            adCount = 0
-                            context.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                                .edit().putInt(I_AD_COUNT, adCount).apply()
-                        }
-                    }
-
-                    listener.onItemClick(note, position)
-                }
-            }
 
             editButton.setOnClickListener {
                 val position = adapterPosition
@@ -180,11 +141,11 @@ open class UserRecyclerViewAdapter(
                     val mNote =
                         this@UserRecyclerViewAdapter.getItem(this@NoteViewHolder.adapterPosition)
                     mNote.timestamp = ts
+
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-
         }
 
     }

@@ -30,7 +30,7 @@ class NoteListAdapter(
 
         fun bind(position: Int) {
 
-            noteListNote.text = noteList[position]
+            noteListNote.text = noteList[position].trim()
 
             deleteButton.setOnClickListener {
                 val dialog = MaterialAlertDialogBuilder(ya!!)

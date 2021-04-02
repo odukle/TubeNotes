@@ -20,4 +20,9 @@
         <item name="android:windowNoDisplay">true</item>
     </style>
 
+    <style name="ToolBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

@@ -85,7 +85,7 @@ class MainActivityFragment : Fragment(), UserRecyclerViewAdapter.OnNoteClickList
                     .whereArrayContainsAny("titleNoCase", stringToListNoCase(searchText))
             } else if (input_searchByNote.isFocused) {
                 query = noteRef.orderBy("noteNoCase", Query.Direction.DESCENDING)
-                    .whereArrayContainsAny("noteNoCase" , stringToListNoCase(searchText))
+                    .whereArrayContainsAny("noteNoCase", stringToListNoCase(searchText))
             }
             val options =
                 query?.let {
@@ -158,29 +158,6 @@ class MainActivityFragment : Fragment(), UserRecyclerViewAdapter.OnNoteClickList
             }
 
         })
-
-//        input_searchByNote.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                if (s.toString().isNotEmpty()) {
-//                    loadNotes(s.toString().toLowerCase(Locale.ROOT))
-//                } else {
-//                    loadNotes(null)
-//                }
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                if (s.toString().isNotEmpty()) {
-//                    loadNotes(s.toString().toLowerCase(Locale.ROOT))
-//                } else {
-//                    loadNotes(null)
-//                }
-//            }
-//
-//        })
 
         loadNotes(null)
 
@@ -323,6 +300,10 @@ class MainActivityFragment : Fragment(), UserRecyclerViewAdapter.OnNoteClickList
             intent.putExtra(NOTE_OBJECT_KEY, note)
             intent.putExtra(NOTE_TIMESTAMP, ts)
             startActivity(intent)
+            requireActivity().overridePendingTransition(
+                R.anim.slide_from_right,
+                R.anim.slide_to_left
+            )
         } catch (e: StringIndexOutOfBoundsException) {
             Toast.makeText(
                 requireContext(),

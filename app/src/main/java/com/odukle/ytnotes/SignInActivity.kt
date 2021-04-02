@@ -56,6 +56,7 @@ class SignInActivity : AppCompatActivity() {
                 }
             }
             startActivity(Intent(this, MainActivity::class.java))
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             finish()
         } else {
             showSignInOptions()

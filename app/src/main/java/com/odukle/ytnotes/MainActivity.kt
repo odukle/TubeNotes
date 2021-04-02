@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
 
         MobileAds.initialize(this)
         adRequest = AdRequest.Builder().build()
-        adView_main.loadAd(adRequest)
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd.adUnitId = INTERSTITIAL_ID
         mInterstitialAd.loadAd(adRequest)
@@ -111,6 +110,8 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
 
     private fun showEditPane() {
         note_details_container.visibility = View.VISIBLE
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+
         // Hide the left pane if in single pane view
         mainFragment.view?.visibility = if (mTwoPane) View.VISIBLE else View.GONE
     }
@@ -120,7 +121,9 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
         if (fragment != null) {
             supportFragmentManager.beginTransaction()
                 .remove(fragment)
+                .setCustomAnimations(R.anim.slide_from_left, R.anim.slide_to_right)
                 .commit()
+
             supportActionBar?.title = "Tube Notes"
         }
 
@@ -164,7 +167,9 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.menuMain_AddNote -> noteEditRequest(null)
+            R.id.menuMain_AddNote -> {
+                noteEditRequest(null)
+            }
 //            R.id.menuMain_settings -> true
             android.R.id.home -> {
                 Log.d(TAG, "onOptionsItemSelected: home button pressed")
@@ -173,9 +178,11 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
             }
             R.id.user_info -> {
                 startActivity(Intent(this, UserInfo::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
             R.id.about_app -> {
                 startActivity(Intent(this, AboutApp::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -207,10 +214,11 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
         Log.d(TAG, "noteEditRequest: starts")
         // create a new fragment to edit the note
         val newFragment = AddEditNote.newInstance(note)
-        supportFragmentManager.beginTransaction()
+        supportFragmentManager
+            .beginTransaction()
             .replace(R.id.note_details_container, newFragment)
-            .commit()
-
+            .setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left)
+            .commitAllowingStateLoss()
         showEditPane()
 
         Log.d(TAG, "Exiting taskEditRequest")
@@ -225,4 +233,7 @@ class MainActivity : AppCompatActivity(), AddEditNote.OnSaveClicked,
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
 }
